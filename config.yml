@@ -1,0 +1,36 @@
+raw_zip: '/project/6050199/ext-data/can_bind/raw_download/Imaging/{modality}/Imaging_{modality}_{group}.zip'
+
+modalities: 
+# - MRI-T1W
+ - MRI-DTI
+# - fMRI-RS
+
+
+clinicalvar_zip: '/project/6050199/ext-data/can_bind/raw_download/Clinical/{clinicalvar}/Clinical_{clinicalvar}_{group}.zip'
+
+groups:
+ - MDD
+ - Control
+
+in_t1: 'MRI-T1W/{group}/{group}/{study}_{site}_{subjnum}_{sesid1}_{sesid2}_defaced.nii.gz'
+glob_t1: 'MRI-T1W/{group}/{group}/*_{site}_{subjnum}_*_defaced.nii.gz'
+
+in_dwi: 'MRI-DTI/{group}/{group}/{site}_{subjnum}_{sesid}/dwi_merged.nii.gz'
+glob_dwi: 'MRI-DTI/{group}/{group}/{site}_{subjnum}_*/dwi_merged.nii.gz'
+    
+
+in_bold: 'fMRI-RS/{group}/{group}/UNPROC-Nifti/{study}_{site}_{subjnum}_{sesid1}_{sesid2}_fMRI-RS_{runid}.nii.gz'
+glob_bold: 'fMRI-RS/{group}/{group}/UNPROC-Nifti/*_{site}_{subjnum}_*_fMRI-RS_*.nii.gz'
+
+
+dataset_description:
+  Name: 'CAN-BIND {group}'
+  BIDSVersion: 1.8.0
+  DatasetType: raw
+
+bold_json:
+  TaskName: 'Resting State'
+  RepetitionTime: 2
+
+clinicalvars:
+  DEMO: demographics
