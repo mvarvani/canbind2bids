@@ -164,3 +164,11 @@ rule rename_csv:
     shell:
         'cp {input}/*/*.csv {output}'
 
+rule split_csv:
+    input:
+        csv = join(tmp_dir,'clinical/{clinicalvar}_{group}.csv')
+    output:
+        tsv = 'test/sub-{site}{subjnum}/beh/sub-{site}{subjnum}_task-{task}_beh.tsv'
+    script:
+        'scripts/split_csv.py'
+
