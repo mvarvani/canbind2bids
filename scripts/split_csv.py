@@ -1,11 +1,28 @@
 import pandas as pd
-import numpy as np
 
-df = pd.read_table(snakemake.input.csv, sep=',',dtype={'subjects':str})
-#df = pd.read_csv(snakemake.input.csv)
-tsvs = np.array_split(df, df.shape[0])
 
-for i, tsv in enumerate(tsvs):
-    tsv.to_csv(snakemake.output.tsv.format(i), sep='\t', index=False, header=True)
+def reformat_table(table: pd.DataFrame):
+    """Reformat a table to conform to the BIDS standard."""
+    return table.assign(
+        participant_id=table.SUBJLABEL.str.split("_").str[1:3].str.join("")
+    ).drop(columns=["SUBJLABEL"])
 
-#how to make (i) the subject ID?
+
+def write_combined_table(combined_table: pd.DataFrame, out_path):
+    combined_table.to_csv(out_path, sep="\t", na_rep="n/a", index=False)
+
+
+def main(control_path, patient_path, out_path):
+    write_combined_table(
+        pd.concat(
+            [
+                reformat_table(pd.read_csv(csv_path))
+                for csv_path in [control_path, patient_path]
+            ]
+        ),
+        out_path,
+    )
+
+
+if __name__ == "__main__":
+    main(snakemake.input.control_csv, snakemake.input.patient_csv, snakemake.output.tsv)
