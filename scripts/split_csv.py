@@ -12,17 +12,12 @@ def write_combined_table(combined_table: pd.DataFrame, out_path):
     combined_table.to_csv(out_path, sep="\t", na_rep="n/a", index=False)
 
 
-def main(control_path, patient_path, out_path):
+def main(csv_path, out_path):
     write_combined_table(
-        pd.concat(
-            [
-                reformat_table(pd.read_csv(csv_path))
-                for csv_path in [control_path, patient_path]
-            ]
-        ),
+        reformat_table(pd.read_csv(csv_path)),
         out_path,
     )
 
 
 if __name__ == "__main__":
-    main(snakemake.input.control_csv, snakemake.input.patient_csv, snakemake.output.tsv)
+    main(snakemake.input.csv, snakemake.output.tsv)

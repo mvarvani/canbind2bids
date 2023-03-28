@@ -1,5 +1,4 @@
 """Handle conversion of CANBIND documentation to BIDS"""
-from __future__ import annotations
 
 import json
 from typing import Any, Optional
@@ -7,7 +6,7 @@ from typing import Any, Optional
 import pandas as pd
 
 
-def gen_description(row: pd.Series) -> str:
+def gen_description(row: pd.Series):
     """Generate a column description.
 
     The generated description will come from question text and special
@@ -32,7 +31,7 @@ def gen_description(row: pd.Series) -> str:
     )
 
 
-def handle_levels(row: pd.Series) -> Optional[dict[str, str]]:
+def handle_levels(row: pd.Series):
     """Generate a Levels object for a row if applicable."""
     if row["Variable Type"] not in ["single-select", "radio"]:
         return None
@@ -52,7 +51,7 @@ def handle_levels(row: pd.Series) -> Optional[dict[str, str]]:
     raise ValueError("Could not parse row with any delimiter.")
 
 
-def row_to_dict(row: pd.Series) -> dict[str, Any]:
+def row_to_dict(row: pd.Series):
     """Generate a BIDS TSV sidecar-formatted dict from a row."""
     return (
         row["Variable Name"]
