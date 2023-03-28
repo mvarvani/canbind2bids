@@ -33,4 +33,32 @@ bold_json:
   RepetitionTime: 2
 
 clinicalvars:
-  DEMO: demographics
+  # - ATHF
+  - BISBAS
+  - BMI
+  - BPI
+  - BRIAN
+  # - CGI
+  - CNSVS
+  # - DARS
+  - DEMO
+  # - DID
+  - ECRR
+  - GAD7
+  - HCL32
+  - IPAQ
+  - LEAPS
+  - MADRS
+  # - MEDHIS
+  # - MINI
+  - NEOFFI
+  - PSQI
+  - PSYHIS
+  - QIDS
+  # - QLESQ
+  - SDS
+  - SEXFX
+  - SHAPS
+  - SPAQ
+  - WHOQOL
+  # - YMRS

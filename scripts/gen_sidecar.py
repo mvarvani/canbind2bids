@@ -48,7 +48,10 @@ def handle_levels(row: pd.Series):
         except ValueError:
             # The delimiter was probably wrong
             pass
-    raise ValueError("Could not parse row with any delimiter.")
+        except AttributeError as err:
+            # We didn't get the kind of value we expected
+            raise AttributeError(f"Could not parse a cell from row:\n{row}") from err
+    raise ValueError(f"Could not parse row:\n{row}")
 
 
 def row_to_dict(row: pd.Series):
